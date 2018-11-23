@@ -1,0 +1,54 @@
+class Solution {
+public:
+    int maxAreaOfIsland(vector<vector<int>>& grid) {
+        int size_rows = grid.size();
+        int size_cols = grid[0].size();
+        int count = 0,result = 0;
+        for(int i = 0; i < size_rows; i++)
+        {
+            for(int j = 0;j < size_cols;j++)
+            {
+                int count = 0;
+                find_one(i,j,grid,count);
+                if(count > result)
+                    result = count;
+            }
+        }
+        return result;
+    }
+    void find_one(int i,int j,vector<vector<int>>& grid,int &count)
+{
+    if(grid[i][j]  == 1)
+    {
+        count++;
+        grid[i][j] = 0;
+    }else{
+        return ;
+    }
+    if((j+1 <= grid[0].size()-1))
+    {
+        if(grid[i][j+1]==1)
+        {
+            find_one(i,j+1,grid,count);
+        }    
+    }
+    if((i+1<=grid.size()-1))
+    {
+        if(grid[i+1][j]==1)
+            find_one(i+1,j,grid,count);
+    }
+    if((i-1 >=0))
+    {   
+        if(grid[i-1][j]==1)
+            find_one(i-1,j,grid,count);
+
+    }
+    if((j-1>=0) &&(grid[i][j-1]==1))
+    {
+        if(grid[i][j-1]==1)
+         find_one(i,j-1,grid,count);
+    }
+        return ;
+}
+};
+
